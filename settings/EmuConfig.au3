@@ -17,9 +17,11 @@ Func InitEmu()
 	Local Const $emuSect = "Emulator"
 	local $emuName_l = IniRead($ini_file, $emuSect, "emuName", "")
 	Local $emuPath_l = IniRead($ini_file, $emuSect, "emuPath", "")
-	Local $emuExists = FileExists(IniRead($ini_file, $emuSect, "emuPath", ""))
+	Local $emuExists = FileExists($emuPath_l)
+	;MsgBox($MB_SYSTEMMODAL, "MCOC Bot EMU EXISTS", $emuExists)
 	local $reSetting = Not $emuExists Or ($emuName_l <> "" Or $emuPath_l <> "")
 	If ($reSetting) Then
+		$emuPath_l = ""
 		While $emuPath_l == ""
 			MsgBox($MB_SYSTEMMODAL, "MCOC Bot", "Select an Emulator")		
 			$emuPath_l = FileOpenDialog ("Select an Emulator", @WindowsDir & "\", "Executable (*.exe)")
